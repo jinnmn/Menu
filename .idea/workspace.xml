@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/FinalProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/management/commands/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_products.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/templates/app/add_product.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/templates/app/add_recipe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/templates/app/products.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/app/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/templates/main/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/templates/main/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/templates/main/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/templates/main/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/templates/main/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/main/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/menu/templates/test.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2tfOl3OTunPr1G1vnoIIWAZ1Jp7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Snegovik/PycharmProjects/FinalProject/menu/app/management/commands"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\app\management\commands" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\app\templates\app" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\staticfiles\admin\css" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\templates" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main\templates\main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main\migrations\templates\main" />
+      <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main\migrations\templates" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="" />
+      <created>1740739809686</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740739809686</updated>
+    </task>
+    <servers />
+  </component>
+</project>

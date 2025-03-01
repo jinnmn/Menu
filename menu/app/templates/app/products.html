@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Список продуктов{% endblock %}
+
+{% block content %}
+    <h1>Список продуктов</h1>
+    <form method="GET" action="{% url 'products' %}">
+        <input type="text" name="search" value="{{ search_query }}" placeholder="Поиск по названию">
+        <button type="submit">Найти</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Калорийность</th>
+                <th>Белки</th>
+                <th>Жиры</th>
+                <th>Углеводы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.calories }}</td>
+                <td>{{ product.proteins }}</td>
+                <td>{{ product.fats }}</td>
+                <td>{{ product.carbohydrates }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
