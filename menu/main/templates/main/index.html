@@ -1,27 +1,44 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-  <div class="home-container">
+<div class="home-container">
     <h1>Добро пожаловать, {{ user.username }}!</h1>
 
-    <div class="random-dishes">
-      {% for dish in random_dishes %}
-        <div class="dish-card">
-          <h2><a href="{% url 'dish_detail' dish.id %}">{{ dish.name }}</a></h2>
-          <p><strong>Тип:</strong> {{ dish.get_dish_type_display }}</p>
-          <p><strong>Описание:</strong> {{ dish.description|truncatewords:20 }}</p>
 
-          {% if dish.photo %}
-            <a href="{% url 'dish_detail' dish.id %}">
-              <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
-            </a>
-          {% else %}
-            <p>Фото нет</p>
-          {% endif %}
+    <form method="GET" action="{% url 'index' %}">
+        <select name="dish_type">
+            <option value="">Выберите тип блюда</option>
+            {% for dish_type_value, dish_type_display in DISH_TYPES %}
+            option value="{{ dish_type_value }}" {% if dish_type_filter == dish_type_value %}selected{% endif %}>
+            {{ dish_type_display }}
+            {% endfor %}
+        </select>
+        <button type="submit">Фильтровать</button>
+    </form>
+
+    <div class="random-dishes">
+        {% if random_dishes %}
+        {% for dish in random_dishes %}
+        <div class="dish-card">
+            <><a href="{% url 'dish_detail' dish.id %}">{{ dish.name }}</a></>
+            <div>
+                <p><strong>Тип:</strong> {{ dish.get_dish_type_display }}</p>
+                <p><strong>Описание:</strong> {{ dish.description|truncatewords:20 }}</p>
+            </div>
+            <div class="dish-small">
+                {% if dish.photo %}
+                <a href="{% url 'dish_detail' dish.id %}">
+                    <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
+                </a>
+                {% else %}
+                <p>Фото нет</p>
+                {% endif %}
+            </div>
         </div>
-      {% empty %}
+        {% endfor %}
+        {% else %}
         <p>Нет блюд для отображения.</p>
-      {% endfor %}
+        {% endif %}
     </div>
-  </div>
+</div>
 {% endblock %}

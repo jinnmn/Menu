@@ -6,6 +6,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),  # Страница логина
     path('logout/', views.logout_view, name='logout'),  # Страница выхода
     path('', views.index, name='index'),
-    path('test/', views.test_view, name='test'),
     path('index/', views.index, name='index'),
 ]

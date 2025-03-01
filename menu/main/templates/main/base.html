@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Блюда{% endblock %}</title>
-     {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}">Главная</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Выход ({{ user.username }})</a></li>
-                    <li><a href="{% url 'add_dish' %}">Добавить блюдо</a></li>
-                    <li><a href="{% url 'products' %}">Продукты</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Вход</a></li>
-                    <li><a href="{% url 'register' %}">Регистрация</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <div class='head'>
+            <a href="{% url 'index' %}">Главная</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Выход ({{ user.username }})</a>
+            <a href="{% url 'add_dish' %}">Добавить блюдо</a><a href="{% url 'products' %}">Продукты</a>
 
-    <main>
+            {% else %}
+            <a href="{% url 'login' %}">Вход</a>
+            <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </div>
+
+    </nav>
+</header>
+
+<main>
+    <section class="main-content container">
+
         {% block content %}{% endblock %}
-    </main>
+    </section>
 
-    <footer>
-        <p>Здесь могла бы быть ваша реклама)</p>
-    </footer>
+</main>
+
+<footer>
+    <p>Здесь могла бы быть ваша реклама)</p>
+</footer>
 </body>
 </html>

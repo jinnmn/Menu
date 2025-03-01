@@ -5,31 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Блюда{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ timestamp }}">
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}">Главная</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Выход ({{ user.username }})</a></li>
-                    <li><a href="{% url 'add_recipe' %}">Добавить рецепт</a></li>
-                    <li><a href="{% url 'add_product' %}">Добавить продукт</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Вход</a></li>
-                    <li><a href="{% url 'register' %}">Регистрация</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выход ({{ user.username }})</a></li>
+            <li><a href="{% url 'add_recipe' %}">Добавить рецепт</a></li>
+            <li><a href="{% url 'add_product' %}">Добавить продукт</a></li>
+            <li><a href="{% url 'dish_search' %}">Поиск</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Вход</a></li>
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+            {% endif %}
+        </ul>
+        <form action="{% url 'dish_search' %}" method="get">
+            <input type="text" name="query" placeholder="Поиск по блюду, продукту, автору"
+                   value="{{ request.GET.query }}">
+            <button type="submit">Найти</button>
+        </form>
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    </nav>
+</header>
 
-    <footer>
-        <p>Здесь могла бы быть ваша реклама)</p>
-    </footer>
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>Сайт задумывался, как инструмент для работы с профессиональными технологическими картами.</p>
+</footer>
 </body>
 </html>

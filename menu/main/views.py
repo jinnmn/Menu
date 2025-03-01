@@ -1,11 +1,15 @@
 import random
-
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 
 from app.models import Dish
+
+
+def home(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'main/index.html', context)
 
 
 def register(request):
@@ -37,24 +41,18 @@ def logout_view(request):
     return redirect('index')
 
 
-def test_view(request):
-    return render(request, 'main/test.html')
-
-
 def index(request):
-    # Получаем все блюда
     all_dishes = Dish.objects.all()
 
-    # Выбираем случайные 5 блюд
+    dish_type_filter = request.GET.get('dish_type', None)
+    if dish_type_filter:
+        all_dishes = all_dishes.filter(dish_type=dish_type_filter)
     if len(all_dishes) < 5:
         random_dishes = all_dishes
     else:
         random_dishes = random.sample(list(all_dishes), 5)
-
-    return render(request, 'main/index.html', {'random_dishes': random_dishes})
-
-
-def home(request):
-    user = request.user
-    context = {'user': user}
-    return render(request, 'main/index.html', context)
+    return render(request, 'main/index.html', {
+        'random_dishes': random_dishes,
+        'dish_type_filter': dish_type_filter,  # передаем текущий фильтр по типу
+        'DISH_TYPES': Dish.DISH_TYPES,  # передаем доступные типы блюд
+    })

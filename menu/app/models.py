@@ -6,15 +6,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 # Create your models here.
-DISH_TYPES = [
-    ('cold_appetizer', 'Холодная закуска'),
-    ('hot_appetizer', 'Горячая закуска'),
-    ('salad', 'Салат'),
-    ('first_course', 'Первое блюдо'),
-    ('main_course', 'Основное блюдо'),
-    ('dessert', 'Десерт'),
-    ('drink', 'Напиток'),
-]
 
 
 class Product(models.Model):
@@ -37,6 +28,16 @@ class DishType(models.Model):
 
 
 class Dish(models.Model):
+    DISH_TYPES = [
+        ('cold_appetizer', 'Холодная закуска'),
+        ('hot_appetizer', 'Горячая закуска'),
+        ('salad', 'Салат'),
+        ('first_course', 'Первое блюдо'),
+        ('main_course', 'Основное блюдо'),
+        ('dessert', 'Десерт'),
+        ('drink', 'Напиток'),
+    ]
+
     name = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     description = models.TextField(blank=True)

@@ -1,30 +1,78 @@
 /* Общие стили для таблицы */
+
+body {
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif; /* Добавляем шрифт по умолчанию */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Легкий фон для страницы */
+}
+
+img {
+    max-width: 200px; /* Устанавливаем максимальную ширину */
+    height: auto; /* Сохраняем пропорции */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+.head {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+/* Стиль для навигации */
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+/* Стили для таблицы */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px; /* Добавим отступ снизу */
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 12px 15px; /* Увеличим отступы для удобства */
+    padding: 12px 15px;
     text-align: left;
-    border: 1px solid #ddd; /* Легкая граница вокруг ячеек */
-    vertical-align: middle; /* Выравнивание текста по центру ячеек */
+    border: 1px solid #ddd;
+    vertical-align: middle;
 }
 
 th {
-    background-color: #f8f9fa; /* Легкий фон для заголовков */
+    background-color: #f8f9fa;
     font-weight: bold;
 }
 
-input[type="number"], select {
+/* Стили для форм */
+input[type="number"], select, input[type="text"], textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px; /* Увеличим шрифт для удобства */
-    box-sizing: border-box; /* Чтобы padding не выходил за пределы поля */
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 button {
@@ -35,11 +83,11 @@ button {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Плавный эффект при наведении */
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #218838; /* Цвет кнопки при наведении */
+    background-color: #218838;
 }
 
 /* Стили для кнопки "Добавить ингредиент" */
@@ -52,14 +100,14 @@ button[type="button"]:hover {
     background-color: #0056b3;
 }
 
-/* Добавим отступы для формы и элементов внутри */
+/* Стили для формы */
 form {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9; /* Легкий фон для формы */
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 form h3 {
@@ -67,19 +115,46 @@ form h3 {
     color: #333;
 }
 
-/* Стили для управления добавлением/удалением строк ингредиентов */
+/* Стили для строк в таблице ингредиентов */
 #ingredients-table tbody tr {
     border-bottom: 1px solid #ddd;
 }
-
-/* Дополнительные стили для сообщений об ошибках в форме */
-form .errorlist {
-    color: red;
-    font-size: 14px;
-    list-style-type: none;
-    padding-left: 0;
+.dish-card {
+    display: flex; /* Включаем flexbox */
+    flex-direction: column; /* Элементы будут располагаться вертикально */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px; /* Отступ снизу для разделения карточек */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-form .errorlist li {
-    margin-bottom: 5px;
+.dish-card .dish-title {
+    font-size: 18px; /* Размер шрифта для названия */
+    font-weight: bold; /* Жирное начертание для названия */
+    margin-bottom: 10px; /* Отступ снизу для разделения с содержимым */
+}
+
+.dish-card img {
+    width: 150px; /* Устанавливаем фиксированную ширину для картинки */
+    height: auto;
+    margin-right: 15px; /* Отступ справа от картинки */
+}
+
+.dish-card .dish-small {
+    display: flex; /* Элементы внутри будут располагаться горизонтально */
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+    justify-content: flex-start; /* Элементы не будут растягиваться по ширине */
+    gap: 15px; /* Отступ между картинкой и текстом */
+}
+
+.dish-card .dish-small p {
+    display: flex;
+    flex-direction: column; /* Текст будет располагаться вертикально */
+    justify-content: flex-start; /* Текст будет выравниваться сверху */
+}
+
+.dish-card p strong {
+    color: #333;
 }
