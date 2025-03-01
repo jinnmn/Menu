@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Dish, DishIngredient
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -71,3 +71,20 @@ class ProductForm(forms.ModelForm):
         if carbohydrates < 0:
             raise forms.ValidationError("Углеводы не могут быть отрицательными.")
         return carbohydrates
+
+class DishIngredientForm(forms.ModelForm):
+    class Meta:
+        model = DishIngredient
+        fields = ['product', 'brutto', 'netto']
+
+class DishForm(forms.ModelForm):
+    class Meta:
+        model = Dish
+        fields = ['name', 'description', 'photo', 'dish_type', 'technology']
+
+    # Поля для ингредиентов
+    ingredients = forms.ModelMultipleChoiceField(
+        queryset=Product.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True
+    )

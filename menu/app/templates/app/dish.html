@@ -22,6 +22,10 @@
       </div>
     {% endif %}
 
+     <div class="dish-type">
+      <strong>Тип блюда:</strong> {{ dish.get_dish_type_display }}
+    </div>
+
     <h2>Ингредиенты</h2>
     <form method="get" action="{% url 'dish_detail' dish.id %}">
       <label for="weight">Вес блюда (г):</label>
@@ -29,12 +33,13 @@
       <button type="submit">Перерасчитать</button>
     </form>
 
-    <h2>Ингредиенты</h2>
+    <h3>Ингредиенты (с перерасчетом)</h3>
     <table border="1" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
       <tr style="background-color: #f2f2f2;">
         <th>Ингредиент</th>
         <th>Брутто (г)</th>
         <th>Нетто (г)</th>
+        <th>Цена (руб.)</th>  <!-- Добавили цену -->
       </tr>
 
       {% for ingredient in ingredients %}
@@ -42,8 +47,22 @@
           <td>{{ ingredient.product.name }}</td>
           <td>{{ ingredient.brutto|floatformat:2 }}</td>
           <td>{{ ingredient.netto|floatformat:2 }}</td>
+          <td>{{ ingredient.price|floatformat:2 }}</td>  <!-- Отображаем цену -->
         </tr>
       {% endfor %}
     </table>
+
+    <h3>Общая цена блюда (на {{ weight }} г):</h3>
+    <ul>
+      <li><strong>Общая цена:</strong> {{ total_price }} руб.</li>  <!-- Отображаем общую цену -->
+    </ul>
+
+    <h3>Пищевая ценность блюда (на {{ weight }} г):</h3>
+    <ul>
+      <li><strong>Калории:</strong> {{ total_calories|floatformat:2 }} ккал</li>
+      <li><strong>Белки:</strong> {{ total_proteins|floatformat:2 }} г</li>
+      <li><strong>Жиры:</strong> {{ total_fats|floatformat:2 }} г</li>
+      <li><strong>Углеводы:</strong> {{ total_carbs|floatformat:2 }} г</li>
+    </ul>
   </div>
 {% endblock %}

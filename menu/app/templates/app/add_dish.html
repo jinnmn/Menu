@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <h1>Добавить новое блюдо</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>
+      <h2>Информация о блюде</h2>
+      {{ dish_form.as_p }}
+    </div>
+
+    <div>
+      <h2>Ингредиенты</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ингредиент</th>
+            <th>Брутто (г)</th>
+            <th>Нетто (г)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in ingredients_formset %}
+            <tr>
+              <td>{{ product.product.name }}</td>
+              <td><input type="number" name="brutto_{{ product.product.id }}" step="0.01" required></td>
+              <td><input type="number" name="netto_{{ product.product.id }}" step="0.01" required></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div>
+        <label for="id_ingredients">Выберите ингредиенты:</label>
+        {{ dish_form.ingredients }}
+      </div>
+    </div>
+
+    <button type="submit">Добавить блюдо</button>
+  </form>
+
+{% endblock %}

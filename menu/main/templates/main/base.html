@@ -14,7 +14,7 @@
                 <li><a href="{% url 'index' %}">Главная</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Выход ({{ user.username }})</a></li>
-                    <li><a href="{% url 'add_recipe' %}">Добавить блюдо</a></li>
+                    <li><a href="{% url 'add_dish' %}">Добавить блюдо</a></li>
                     <li><a href="{% url 'products' %}">Продукты</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Вход</a></li>
