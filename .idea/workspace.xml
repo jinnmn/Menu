@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="вроде работает, но это не точно">
+    <list default="true" id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="Done">
+      <change afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu/app/management/commands/fill_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_products.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/menu/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/menu/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/menu/main/templates/main/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -36,9 +38,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "Python.fill_menu.executor": "Run",
     "Python.views.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "2a0ceaf7",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/Snegovik/PycharmProjects/FinalProject/menu/media/dish_photos"
   }
 }]]></component>
@@ -55,6 +58,35 @@
       <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main\migrations\templates\main" />
       <recent name="C:\Users\Snegovik\PycharmProjects\FinalProject\menu\main\migrations\templates" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="fill_menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FinalProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/menu/app/management/commands" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/menu/app/management/commands/fill_menu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.fill_menu" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -104,7 +136,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740812295287</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="починился">
+      <option name="closed" value="true" />
+      <created>1740846623258</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740846623258</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Done">
+      <option name="closed" value="true" />
+      <created>1740850939588</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740850939588</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -112,7 +160,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -123,6 +183,8 @@
     <MESSAGE value="Припилил калькулятор" />
     <MESSAGE value="есть домашняя страница&#10;и кривая форма блюда" />
     <MESSAGE value="вроде работает, но это не точно" />
-    <option name="LAST_COMMIT_MESSAGE" value="вроде работает, но это не точно" />
+    <MESSAGE value="починился" />
+    <MESSAGE value="Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done" />
   </component>
 </project>
