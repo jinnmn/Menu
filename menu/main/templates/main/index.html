@@ -7,12 +7,14 @@
     <div class="random-dishes">
       {% for dish in random_dishes %}
         <div class="dish-card">
-          <h2>{{ dish.name }}</h2>
+          <h2><a href="{% url 'dish_detail' dish.id %}">{{ dish.name }}</a></h2>
           <p><strong>Тип:</strong> {{ dish.get_dish_type_display }}</p>
           <p><strong>Описание:</strong> {{ dish.description|truncatewords:20 }}</p>
 
           {% if dish.photo %}
-            <img src="{{ dish.photo.url }}" alt="{{ dish.name }}" width="200">
+            <a href="{% url 'dish_detail' dish.id %}">
+              <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
+            </a>
           {% else %}
             <p>Фото нет</p>
           {% endif %}

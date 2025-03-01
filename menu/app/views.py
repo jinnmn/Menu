@@ -51,7 +51,6 @@ def dish_detail(request, dish_id):
     # Перерасчет ингредиентов
     k = weight / Decimal(1000)
     ingredients = dish.ingredients.all()
-    total_price = Decimal(0)
     recalculated_ingredients = []
 
     total_price = Decimal(0)
@@ -65,13 +64,13 @@ def dish_detail(request, dish_id):
         netto_per_weight = ingredient.netto * k
 
         # Добавление в общую сумму
-        price_per_weight = ingredient.product.price * k
+        price_per_weight = ingredient.product.price * (brutto_per_weight / ingredient.brutto)
         total_price += price_per_weight
 
-        total_calories += ingredient.product.calories * k
-        total_proteins += ingredient.product.proteins * k
-        total_fats += ingredient.product.fats * k
-        total_carbs += ingredient.product.carbohydrates * k
+        total_calories += ingredient.product.calories * (netto_per_weight / ingredient.netto) / 10
+        total_proteins += ingredient.product.proteins * (netto_per_weight / ingredient.netto) /10
+        total_fats += ingredient.product.fats * (netto_per_weight / ingredient.netto) / 10
+        total_carbs += ingredient.product.carbohydrates * (netto_per_weight / ingredient.netto) /10
 
         recalculated_ingredients.append({
             'product': ingredient.product,

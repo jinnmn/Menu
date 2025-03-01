@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -46,9 +49,14 @@ class Dish(models.Model):
 
     def save(self, *args, **kwargs):
         if self.photo:
-            filename = f"{self.author.id}_{self.id}_{self.photo.name.split('.')[-1]}"
-            self.photo.name = filename
+            # назвать по айдишникам не получилось(ибо их пока нет(()
+            random_filename = ''.join(random.choices(string.ascii_letters + string.digits, k=20))
+            extension = self.photo.name.split('.')[-1]  # Получаем расширение файла
+            new_filename = f"{random_filename}.{extension}"
+            self.photo.name = new_filename
+
         super().save(*args, **kwargs)
+
 
     def clean(self):
         if not self.name:
