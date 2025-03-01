@@ -1,25 +1,15 @@
 from decimal import Decimal
 
 from django.contrib.auth.decorators import login_required
-from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Dish, DishIngredient
+from .models import Product, Dish
 from .forms import ProductForm, DishForm, DishIngredientForm
 
-
-# Create your views here.
-DishIngredientFormSet = modelformset_factory(
-    DishIngredient,
-    form=DishIngredientForm,
-    extra=1,  # Это добавляет одну пустую форму по умолчанию для добавления нового ингредиента
-    can_delete=True  # Можно добавлять/удалять ингредиенты
-)
+DEFAULT_WEIGHT = Decimal(1000)
+NUTRIENT_CONST = 10
 
 
-def add_recipe(request):
-    return render(request, 'app/add_recipe.html')
-
-
+@login_required
 def product_list(request):
     query = request.GET.get('search', '').strip()
     products = Product.objects.all()
@@ -28,7 +18,7 @@ def product_list(request):
         products = products.filter(name__icontains=query)
     return render(request, 'app/products.html', {'products': products, 'search_query': query})
 
-
+@login_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -40,53 +30,53 @@ def add_product(request):
 
     return render(request, 'app/add_product.html', {'form': form})
 
-
+@login_required
 def dish_detail(request, dish_id):
     dish = get_object_or_404(Dish, id=dish_id)
-    weight_str = request.GET.get('weight', '1000')  # строка по умолчанию
+    weight_str = request.GET.get('weight', DEFAULT_WEIGHT)  # строка по умолчанию
     try:
         weight = Decimal(weight_str)
     except ValueError:
-        weight = 1000.0
-    # Перерасчет ингредиентов
-    k = weight / Decimal(1000)
+        weight = DEFAULT_WEIGHT
+
+    calc_k = weight / DEFAULT_WEIGHT  # Коофицент веса
     ingredients = dish.ingredients.all()
     recalculated_ingredients = []
 
     total_price = Decimal(0)
-    total_calories = 0
-    total_proteins = Decimal(0)
-    total_fats = Decimal(0)
-    total_carbs = Decimal(0)
+    total_values = {
+        'calories': 0,
+        'proteins': Decimal(0),
+        'fats': Decimal(0),
+        'carbohydrates': Decimal(0),
+    }
     # Перерасчет ингредиентов
-    for ingredient in ingredients:
-        brutto_per_weight = ingredient.brutto * k
-        netto_per_weight = ingredient.netto * k
+    for product in ingredients:
+        brutto_per_weight = product.brutto * calc_k
+        netto_per_weight = product.netto * calc_k
 
-        # Добавление в общую сумму
-        price_per_weight = ingredient.product.price * (brutto_per_weight / ingredient.brutto)
+        price_per_weight = brutto_per_weight * (product.product.price / DEFAULT_WEIGHT)  # Цена по брутто
         total_price += price_per_weight
 
-        total_calories += ingredient.product.calories * (netto_per_weight / ingredient.netto) / 10
-        total_proteins += ingredient.product.proteins * (netto_per_weight / ingredient.netto) /10
-        total_fats += ingredient.product.fats * (netto_per_weight / ingredient.netto) / 10
-        total_carbs += ingredient.product.carbohydrates * (netto_per_weight / ingredient.netto) /10
+        for nutrient in ['calories', 'proteins', 'fats', 'carbohydrates']:
+            total_values[nutrient] += getattr(product.product, nutrient) * calc_k
 
         recalculated_ingredients.append({
-            'product': ingredient.product,
+            'product': product.product,
             'brutto': brutto_per_weight.quantize(Decimal('0.01')),
             'netto': netto_per_weight.quantize(Decimal('0.01')),
             'price': price_per_weight.quantize(Decimal('0.01')),
         })
+
     return render(request, 'app/dish.html', {
         'dish': dish,
         'ingredients': recalculated_ingredients,
         'weight': weight,
         'total_price': total_price.quantize(Decimal('0.01')),
-        'total_calories': total_calories,  # общие калории
-        'total_proteins': total_proteins.quantize(Decimal('0.01')),  # общие белки
-        'total_fats': total_fats.quantize(Decimal('0.01')),  # общие жиры
-        'total_carbs': total_carbs.quantize(Decimal('0.01')),  # общие углеводы
+        'total_calories': total_values['calories'],
+        'total_proteins': total_values['proteins'].quantize(Decimal('0.01')),
+        'total_fats': total_values['fats'].quantize(Decimal('0.01')),
+        'total_carbs': total_values['carbohydrates'].quantize(Decimal('0.01')),
     })
 
 
@@ -111,7 +101,7 @@ def add_dish(request):
         'dish_form': dish_form,
     })
 
-
+@login_required
 def add_ingredient(request, dish_id, ingredient_count):
     dish = get_object_or_404(Dish, id=dish_id)
 
