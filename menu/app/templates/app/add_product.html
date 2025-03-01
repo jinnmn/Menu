@@ -4,10 +4,12 @@
 
 {% block content %}
     <h1>Добавить новый продукт</h1>
-    <p>На этой странице будет форма для добавления нового продукта в базу данных.</p>
 
     <form method="POST">
         {% csrf_token %}
-
+        {{ form.as_p }}
+        <button type="submit">Добавить продукт</button>
     </form>
+
+    <a href="{% url 'products' %}">Назад к списку продуктов</a>
 {% endblock %}

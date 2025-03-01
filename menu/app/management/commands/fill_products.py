@@ -65,8 +65,11 @@ class Command(BaseCommand):
             {'name': 'Мёд', 'price': '200.00', 'calories': 304, 'proteins': '0.3', 'fats': '0.0',
              'carbohydrates': '82.4'},
             {'name': 'Шоколад', 'price': '300.00', 'calories': 546, 'proteins': '4.9', 'fats': '31.0',
-             'carbohydrates': '61.0'}
-
+             'carbohydrates': '61.0'},
+            {'name': "Йогурт", 'price': 50.00, 'calories': 120, 'proteins': 4.5, 'fats': 3.0,
+             'carbohydrates': 18.0},
+            {'name': "Орехи",'price': 150.00, 'calories': 600, 'proteins': 20.0, 'fats': 50.0,
+             'carbohydrates': 20.0},
         ]
 
         for product in products:

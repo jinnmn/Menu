@@ -4,6 +4,10 @@
 
 {% block content %}
     <h1>Список продуктов</h1>
+    <a href="{% url 'add_product' %}">
+        <button>Добавить продукт</button>
+    </a>
+
     <form method="GET" action="{% url 'products' %}">
         <input type="text" name="search" value="{{ search_query }}" placeholder="Поиск по названию">
         <button type="submit">Найти</button>

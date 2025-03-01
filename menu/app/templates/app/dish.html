@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <div class="dish-container">
+    <h1>{{ dish.name }}</h1>
+    <div class="author">
+      <strong>Автор:</strong> {{ dish.author.username }}
+    </div>
+    <div class="description">
+      <strong>Описание:</strong>
+      <p>{{ dish.description }}</p>
+    </div>
+    <div class="technology">
+      <strong>Технология приготовления:</strong>
+      <p>{{ dish.technology }}</p>
+    </div>
+
+    {% if dish.photo %}
+      <div class="photo">
+        <strong>Фото:</strong>
+        <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
+      </div>
+    {% endif %}
+
+    <h2>Ингредиенты</h2>
+    <form method="get" action="{% url 'dish_detail' dish.id %}">
+      <label for="weight">Вес блюда (г):</label>
+      <input type="number" name="weight" value="{{ weight }}" step="10" min="100">
+      <button type="submit">Перерасчитать</button>
+    </form>
+
+    <h2>Ингредиенты</h2>
+    <table border="1" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+      <tr style="background-color: #f2f2f2;">
+        <th>Ингредиент</th>
+        <th>Брутто (г)</th>
+        <th>Нетто (г)</th>
+      </tr>
+
+      {% for ingredient in ingredients %}
+        <tr>
+          <td>{{ ingredient.product.name }}</td>
+          <td>{{ ingredient.brutto|floatformat:2 }}</td>
+          <td>{{ ingredient.netto|floatformat:2 }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
