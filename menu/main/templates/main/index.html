@@ -4,12 +4,11 @@
 <div class="home-container">
     <h1>Добро пожаловать, {{ user.username }}!</h1>
 
-
     <form method="GET" action="{% url 'index' %}">
         <select name="dish_type">
             <option value="">Выберите тип блюда</option>
             {% for dish_type_value, dish_type_display in DISH_TYPES %}
-            option value="{{ dish_type_value }}" {% if dish_type_filter == dish_type_value %}selected{% endif %}>
+            <option value="{{ dish_type_value }}" {% if dish_type_filter == dish_type_value %}selected{% endif %}>
             {{ dish_type_display }}
             {% endfor %}
         </select>

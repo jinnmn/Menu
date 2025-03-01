@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-  <div class="dish-container">
+  <div id="dish-container1">
     <h1>{{ dish.name }}</h1>
     <div class="author">
       <strong>Автор:</strong> {{ dish.author.username }}
@@ -10,17 +10,17 @@
       <strong>Описание:</strong>
       <p>{{ dish.description }}</p>
     </div>
-    <div class="technology">
-      <strong>Технология приготовления:</strong>
-      <p>{{ dish.technology }}</p>
-    </div>
-
     {% if dish.photo %}
       <div class="photo">
-        <strong>Фото:</strong>
         <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
       </div>
     {% endif %}
+    <div class="technology">
+      <p>Технология приготовления:</p>
+      <textarea id="long-textarea" name="long-textarea" rows="4" cols="50" style="resize: both; overflow: auto;">{{ dish.technology }}</textarea>
+    </div>
+
+
 
      <div class="dish-type">
       <strong>Тип блюда:</strong> {{ dish.get_dish_type_display }}

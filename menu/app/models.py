@@ -74,7 +74,7 @@ class Dish(models.Model):
             if file_extension not in ['jpg', 'jpeg', 'png']:
                 raise ValidationError('Поддерживаются только изображения в формате jpg, jpeg и png.')
 
-        if self.dish_type not in dict(DISH_TYPES):
+        if self.dish_type not in dict(self.DISH_TYPES):
             raise ValidationError('Неверный тип блюда.')
 
     def clean_fields(self, exclude=None):
