@@ -2,42 +2,50 @@
 
 {% block content %}
   <h1>Добавить новое блюдо</h1>
-
-  <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    {{ dish_form.as_p }}
 
-    <div>
-      <h2>Информация о блюде</h2>
-      {{ dish_form.as_p }}
-    </div>
-
-    <div>
-      <h2>Ингредиенты</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Ингредиент</th>
-            <th>Брутто (г)</th>
-            <th>Нетто (г)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for product in ingredients_formset %}
+    <h3>Ингредиенты</h3>
+    <table>
+        {{ ingredients_formset.management_form }}
+        {% for form in ingredients_formset %}
             <tr>
-              <td>{{ product.product.name }}</td>
-              <td><input type="number" name="brutto_{{ product.product.id }}" step="0.01" required></td>
-              <td><input type="number" name="netto_{{ product.product.id }}" step="0.01" required></td>
+                <td>{{ form.as_p }}</td>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <div>
-        <label for="id_ingredients">Выберите ингредиенты:</label>
-        {{ dish_form.ingredients }}
-      </div>
-    </div>
+        {% endfor %}
+    </table>
 
-    <button type="submit">Добавить блюдо</button>
-  </form>
+    <button type="submit">Сохранить блюдо</button>
+</form>
+
+<script>
+    let ingredientIndex = {{ ingredient_count }};
+
+    function addIngredientRow() {
+      const table = document.getElementById('ingredients-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      const productCell = newRow.insertCell(0);
+      const bruttoCell = newRow.insertCell(1);
+      const nettoCell = newRow.insertCell(2);
+
+      const productField = document.createElement('select');
+      productField.name = `form-${ingredientIndex}-product`;
+
+      const bruttoField = document.createElement('input');
+      bruttoField.type = 'number';
+      bruttoField.name = `form-${ingredientIndex}-brutto`;
+
+      const nettoField = document.createElement('input');
+      nettoField.type = 'number';
+      nettoField.name = `form-${ingredientIndex}-netto`;
+
+      productCell.appendChild(productField);
+      bruttoCell.appendChild(bruttoField);
+      nettoCell.appendChild(nettoField);
+
+      ingredientIndex += 1;
+    }
+  </script>
 
 {% endblock %}

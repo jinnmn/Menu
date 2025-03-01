@@ -77,14 +77,24 @@ class DishIngredientForm(forms.ModelForm):
         model = DishIngredient
         fields = ['product', 'brutto', 'netto']
 
+class DishIngredientForm(forms.ModelForm):
+    class Meta:
+        model = DishIngredient
+        fields = ['product', 'brutto', 'netto']
+        labels = {
+            'product': 'Название продукта',
+            'brutto': 'Вес до очистки/обрезки',
+            'netto': 'Чистый вес',
+        }
+
 class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
         fields = ['name', 'description', 'photo', 'dish_type', 'technology']
-
-    # Поля для ингредиентов
-    ingredients = forms.ModelMultipleChoiceField(
-        queryset=Product.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
+        labels = {
+            'name': 'Название блюда',
+            'description': 'Описание',
+            'photo': 'Фото',
+            'dish_type': 'Тип',
+            'technology': 'Технология приготовления',
+        }

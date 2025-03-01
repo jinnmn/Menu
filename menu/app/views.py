@@ -1,12 +1,20 @@
 from decimal import Decimal
 
 from django.contrib.auth.decorators import login_required
+from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Dish, DishIngredient
 from .forms import ProductForm, DishForm, DishIngredientForm
 
 
 # Create your views here.
+DishIngredientFormSet = modelformset_factory(
+    DishIngredient,
+    form=DishIngredientForm,
+    extra=1,  # Это добавляет одну пустую форму по умолчанию для добавления нового ингредиента
+    can_delete=True  # Можно добавлять/удалять ингредиенты
+)
+
 
 def add_recipe(request):
     return render(request, 'app/add_recipe.html')
@@ -87,32 +95,29 @@ def dish_detail(request, dish_id):
 def add_dish(request):
     if request.method == 'POST':
         dish_form = DishForm(request.POST, request.FILES)
-        ingredients_formset = []
+        ingredients_formset = DishIngredientFormSet(request.POST)
 
-        if dish_form.is_valid():
+        if dish_form.is_valid() and ingredients_formset.is_valid():
             dish = dish_form.save(commit=False)
             dish.author = request.user
             dish.save()
 
             # Сохранение ингредиентов
-            products = request.POST.getlist('ingredients')  # Получаем список выбранных продуктов
-            for product_id in products:
-                product = Product.objects.get(id=product_id)
-                brutto = request.POST.get(f'brutto_{product.id}', 0)
-                netto = request.POST.get(f'netto_{product.id}', 0)
-                DishIngredient.objects.create(
-                    dish=dish,
-                    product=product,
-                    brutto=brutto,
-                    netto=netto
-                )
+            for form in ingredients_formset:
+                ingredient = form.save(commit=False)
+                ingredient.dish = dish  # Указываем связь с текущим блюдом
+                ingredient.save()
 
             return redirect('dish_detail', dish_id=dish.id)
     else:
         dish_form = DishForm()
-        ingredients_formset = DishIngredientForm()
+        ingredients_formset = DishIngredientFormSet(queryset=DishIngredient.objects.none())
+
+    ingredient_count = len(ingredients_formset.forms)
+
 
     return render(request, 'app/add_dish.html', {
         'dish_form': dish_form,
         'ingredients_formset': ingredients_formset,
+        'ingredient_count': ingredient_count
     })
