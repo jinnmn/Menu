@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import modelformset_factory
+
 from .models import Product, Dish, DishIngredient
 
 class ProductForm(forms.ModelForm):
@@ -72,10 +74,6 @@ class ProductForm(forms.ModelForm):
             raise forms.ValidationError("Углеводы не могут быть отрицательными.")
         return carbohydrates
 
-class DishIngredientForm(forms.ModelForm):
-    class Meta:
-        model = DishIngredient
-        fields = ['product', 'brutto', 'netto']
 
 class DishIngredientForm(forms.ModelForm):
     class Meta:
@@ -86,6 +84,33 @@ class DishIngredientForm(forms.ModelForm):
             'brutto': 'Вес до очистки/обрезки',
             'netto': 'Чистый вес',
         }
+
+    error_messages = {
+        'product': {
+            'required': 'Поле "Продукт" обязательно для заполнения.',
+        },
+        'brutto': {
+            'required': 'Поле "Вес до очистки" обязательно для заполнения.',
+            'invalid': 'Введите корректный вес.',
+        },
+        'netto': {
+            'required': 'Поле "Чистый вес" обязательно для заполнения.',
+            'invalid': 'Введите корректный чистый вес.',
+        },
+    }
+
+    def clean_brutto(self):
+        brutto = self.cleaned_data.get('brutto')
+        if brutto <= 0:
+            raise forms.ValidationError("Вес до очистки должен быть больше 0.")
+        return brutto
+
+    def clean_netto(self):
+        netto = self.cleaned_data.get('netto')
+        if netto <= 0:
+            raise forms.ValidationError("Чистый вес должен быть больше 0.")
+        return netto
+
 
 class DishForm(forms.ModelForm):
     class Meta:
@@ -98,3 +123,24 @@ class DishForm(forms.ModelForm):
             'dish_type': 'Тип',
             'technology': 'Технология приготовления',
         }
+
+    error_messages = {
+        'name': {
+            'required': 'Поле "Название блюда" обязательно для заполнения.',
+        },
+        'description': {
+            'required': 'Поле "Описание" обязательно для заполнения.',
+        },
+        'dish_type': {
+            'required': 'Поле "Тип" обязательно для заполнения.',
+        },
+        'technology': {
+            'required': 'Поле "Технология приготовления" обязательно для заполнения.',
+        },
+    }
+
+DishIngredientFormSet = modelformset_factory(
+    DishIngredient,
+    form=DishIngredientForm,
+    extra=0
+)

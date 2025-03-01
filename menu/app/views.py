@@ -79,7 +79,6 @@ def dish_detail(request, dish_id):
             'netto': netto_per_weight.quantize(Decimal('0.01')),
             'price': price_per_weight.quantize(Decimal('0.01')),
         })
-    # Возвращаем результат в шаблон
     return render(request, 'app/dish.html', {
         'dish': dish,
         'ingredients': recalculated_ingredients,
@@ -91,33 +90,60 @@ def dish_detail(request, dish_id):
         'total_carbs': total_carbs.quantize(Decimal('0.01')),  # общие углеводы
     })
 
+
 @login_required
 def add_dish(request):
     if request.method == 'POST':
         dish_form = DishForm(request.POST, request.FILES)
-        ingredients_formset = DishIngredientFormSet(request.POST)
+        # Количество ингредиентов
+        ingredient_count = int(request.POST.get('ingredient_count', 0))
 
-        if dish_form.is_valid() and ingredients_formset.is_valid():
+        if dish_form.is_valid():
+            # Сохраняем блюдо, но не ингредиенты пока
             dish = dish_form.save(commit=False)
             dish.author = request.user
             dish.save()
-
-            # Сохранение ингредиентов
-            for form in ingredients_formset:
-                ingredient = form.save(commit=False)
-                ingredient.dish = dish  # Указываем связь с текущим блюдом
-                ingredient.save()
-
-            return redirect('dish_detail', dish_id=dish.id)
+            print(ingredient_count)
+            return redirect('add_ingredients', dish_id=dish.id, ingredient_count=ingredient_count)
     else:
         dish_form = DishForm()
-        ingredients_formset = DishIngredientFormSet(queryset=DishIngredient.objects.none())
-
-    ingredient_count = len(ingredients_formset.forms)
-
 
     return render(request, 'app/add_dish.html', {
         'dish_form': dish_form,
-        'ingredients_formset': ingredients_formset,
-        'ingredient_count': ingredient_count
+    })
+
+
+def add_ingredient(request, dish_id, ingredient_count):
+    dish = get_object_or_404(Dish, id=dish_id)
+
+    if request.method == 'POST':
+        formset = []
+        for i in range(ingredient_count):
+            form = DishIngredientForm(request.POST, prefix=f"ingredient_{i}")
+            formset.append(form)
+
+        # Проверяем, если все формы валидны
+        if all(form.is_valid() for form in formset):
+            # Сохраняем все ингредиенты для блюда
+            for form in formset:
+                dish_ingredient = form.save(commit=False)
+                dish_ingredient.dish = dish
+                dish_ingredient.save()
+
+            return redirect('dish_detail', dish_id=dish.id)
+    else:
+        formset = [DishIngredientForm(prefix=f"ingredient_{i}") for i in range(ingredient_count)]
+
+    # скрытые поля для управления формами
+    management_form = {
+        'TOTAL_FORMS': ingredient_count,
+        'INITIAL_FORMS': 0,
+        'MAX_NUM_FORMS': ingredient_count
+    }
+
+    return render(request, 'app/add_ingredients.html', {
+        'dish': dish,
+        'formset': formset,
+        'ingredient_count': ingredient_count,
+        'management_form': management_form
     })

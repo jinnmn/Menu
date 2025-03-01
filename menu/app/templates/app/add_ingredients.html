@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+  <h1>Добавление ингредиентов для блюда "{{ dish.name }}"</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <h3>Количество ингредиентов: {{ ingredient_count }}</h3>
+
+    <!-- Добавляем скрытые поля для управления формами -->
+    <div style="display:none;">
+      <input type="hidden" name="form-TOTAL_FORMS" value="{{ management_form.TOTAL_FORMS }}">
+      <input type="hidden" name="form-INITIAL_FORMS" value="{{ management_form.INITIAL_FORMS }}">
+      <input type="hidden" name="form-MAX_NUM_FORMS" value="{{ management_form.MAX_NUM_FORMS }}">
+    </div>
+
+    {% for form in formset %}
+      <div class="form-row">
+        <label for="{{ form.product.id_for_label }}">Ингредиент:</label>
+        {{ form.product }}
+        <label for="{{ form.brutto.id_for_label }}">Brutto:</label>
+        {{ form.brutto }}
+        <label for="{{ form.netto.id_for_label }}">Netto:</label>
+        {{ form.netto }}
+      </div>
+    {% endfor %}
+
+    <button type="submit">Сохранить ингредиенты</button>
+  </form>
+{% endblock %}
