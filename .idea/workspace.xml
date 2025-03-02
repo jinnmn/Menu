@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="Done">
-      <change afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_menu.py" afterDir="false" />
+    <list default="true" id="bfca0961-aa94-47f0-a11e-53ccf754efb1" name="Changes" comment="Script ready">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu/app/management/commands/fill_products.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_products.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu/app/management/commands/fill_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu/app/management/commands/fill_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/menu/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/menu/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/menu/main/templates/main/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +153,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740850939588</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Script ready">
+      <option name="closed" value="true" />
+      <created>1740869129383</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1740869129383</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Script ready">
+      <option name="closed" value="true" />
+      <created>1740872819022</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1740872819022</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +202,7 @@
     <MESSAGE value="вроде работает, но это не точно" />
     <MESSAGE value="починился" />
     <MESSAGE value="Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done" />
+    <MESSAGE value="Script ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Script ready" />
   </component>
 </project>

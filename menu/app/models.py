@@ -19,14 +19,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-
-class DishType(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Dish(models.Model):
     DISH_TYPES = [
         ('cold_appetizer', 'Холодная закуска'),
@@ -44,6 +36,7 @@ class Dish(models.Model):
     photo = models.ImageField(upload_to='dish_photos/', null=True, blank=True)
     dish_type = models.CharField(max_length=20, choices=DISH_TYPES)
     technology = models.TextField(blank=True)
+
 
     def __str__(self):
         return self.name
